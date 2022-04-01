@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('vehicles/{id}', [VehicleController::class, 'show'])->name('vehicles.show');
     Route::get('vehicle-reports', [VehicleController::class, 'reports'])->name('vehicles.show.reports');
     Route::put('vehicles/{id}', [VehicleController::class, 'update'])->name('vehicles.update');
+    Route::delete('vehicles/{id}', [VehicleController::class, 'delete'])->name('vehicles.delete');
 
     Route::post('assign-vehicle', [VehicleOrderController::class, 'store'])->name('vehicles.store');
 });

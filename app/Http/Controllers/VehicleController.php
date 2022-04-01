@@ -41,14 +41,14 @@ class VehicleController extends Controller
     }
     
     public function index() {
-        $data = Vehicle::select('vehicle_type as Vehicle Type', 'registration', 'status', 'id')
+        $data = Vehicle::select('vehicle_type', 'registration', 'status', 'id')
             ->orderBy('id', 'DESC')
             ->get();
         
         return response()->json([
             'status' => true,
             'data' => $data,
-            'headers' => ['Vehicle Type', 'registration', 'status'],
+            'headers' => ['vehicle_type', 'registration', 'status'],
             'totals' => count($data)
         ], 200);
     }
@@ -75,6 +75,14 @@ class VehicleController extends Controller
         if($request->status && $request->status != $vehicle->status) {
             $vehicle->status = $request->status;
         }
+
+        if($request->vehicle_type && $request->vehicle_type != $vehicle->vehicle_type) {
+            $vehicle->vehicle_type = $request->vehicle_type;
+        }
+        
+        if($request->registration && $request->registration != $vehicle->registration) {
+            $vehicle->registration = $request->registration;
+        }        
 
         $saved = $vehicle->save();
 
@@ -108,6 +116,31 @@ class VehicleController extends Controller
                 'loading' => $loading,
                 'on_transit' => $on_transit
             ]
+        ], 200);
+    }
+
+    public function delete($id) {
+        $vehicle = Vehicle::find($id);
+
+        if( !$vehicle) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Vehicle not found'
+            ], 404);
+        }
+
+        $deleted = $vehicle->delete();
+
+        if( !$deleted) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Vehicle not deleted.'
+            ], 500);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Vehicle deleted.'
         ], 200);
     }
 }

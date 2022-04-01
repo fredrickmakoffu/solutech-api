@@ -13,6 +13,12 @@ To setup your database, run php artisan migrate
 
 To run this project locally, navigate into the project from the terminal and type out 'php artisan serve'. 
 
-Please note the port where the app runs, and on your front-end app in the main.js file, find the 'axios.defaults.baseURL' variable and make sure the port is 8000. If not, update the port in the main.js file to the new port, e.g., locahost:{new-port}
+Please note the port where the app runs, and on your front-end app in the main.js file, find the 'axios.defaults.baseURL' variable and make sure the port is 8000. If not, update the port in the main.js file to the new port, e.g. locahost:{new-port}
 
 
+### Test User Credentials
+
+You can use these credentials to login to the system by default:
+
+email: cosmas@example.com
+password: 12345678
